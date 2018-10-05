@@ -27,11 +27,10 @@ fun readFragment(reader: BufferedReader, outputStream: FileOutputStream): Boolea
         tmpstr = reader.readLine()
     } while (tmpstr != DELIMETER && tmpstr != null)
 
-    val ammoBytes = request.toString().trim(' ', '\n').toByteArray()
+    val ammoBytes = request.toString().trim(' ', '\n').plus("\n\r").toByteArray()
     val ammoSize = ammoBytes.size
     outputStream.write("$ammoSize $tag\n".toByteArray())
     outputStream.write(ammoBytes)
-    outputStream.write("\n\r".toByteArray())
 
     return tmpstr == null
 }
